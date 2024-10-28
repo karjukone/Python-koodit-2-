@@ -1,21 +1,8 @@
-
-
-class Talo:
+class Hissi:
     def __init__(self, alinkerros, ylinkerros):
         self.alinkerros = alinkerros
         self.ylinkerros = ylinkerros
-        self.hissit = [5]
-
-    def aja_hissia(self, hissin_numero, kohdekerros):
-        hissin_numero = self.hissit(hissin_numero)  #pitääkö laittaa -1 koska listan indeksi alkaa nollasta, entä jos hissin eka kerros on myös 0
-        if hissin_numero in self.hissit:
-            self.siirry_kerrokseen(kohdekerros)
-
-
-
-class Hissi:
-    def __init__(self):
-        self.kerroksessa = 0
+        self.kerroksessa = alinkerros
 
     def siirry_kerrokseen(self, kerros):
         if kerros > self.kerroksessa:
@@ -34,4 +21,21 @@ class Hissi:
         print(f"Hissi on kerroksessa {self.kerroksessa}")
 
 
-talo = Talo(0, )
+class Talo:
+    def __init__(self, alin_kerros, ylin_kerros, hissien_lkm):
+        self.hissit = [Hissi(alin_kerros, ylin_kerros) for _ in range(hissien_lkm)]
+        print(f"Talo luotu, jossa on {hissien_lkm} hissiä, alin kerros {alin_kerros}, ylin kerros {ylin_kerros}.")
+
+    def aja_hissiä(self, hissi_numero, kohde_kerros):
+        if 0 <= hissi_numero < len(self.hissit):
+            print(f"Ajetaan hissiä {hissi_numero} kohdekerrokseen {kohde_kerros}.")
+            self.hissit[hissi_numero].siirry_kerrokseen(kohde_kerros)
+        else:
+            print("Virhe: Hissin numero on virheellinen.")
+
+
+talo = Talo(1, 10, 3)  
+talo.aja_hissiä(0, 5)
+talo.aja_hissiä(1, 7)
+talo.aja_hissiä(2, 3)
+talo.aja_hissiä(0, 1)
