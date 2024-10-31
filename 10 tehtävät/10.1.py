@@ -3,7 +3,7 @@ class Hissi:
     def __init__(self, alinkerros, ylinkerros):
         self.alinkerros = alinkerros
         self.ylinkerros = ylinkerros
-        self.kerroksessa = 0
+        self.kerroksessa = alinkerros
 
     def siirry_kerrokseen(self, kerros):
         if kerros > self.kerroksessa:
