@@ -20,11 +20,22 @@ class Auto:
 
 class Sahkoauto(Auto):
     def __init__(self, rekkari, huippunopeus, akkukapasiteetti):
-        super().__init__(rekkari)
-        super().__init__(huippunopeus)
+        super().__init__(rekkari, huippunopeus)
         self.akkukapasiteetti = akkukapasiteetti
 
 class Polttomoottoriauto(Auto):
     def __init__(self, rekkari, huippunopeus, bensatankki):
         super().__init__(rekkari, huippunopeus)
         self.bensatankki = bensatankki
+
+sahkoauto = Sahkoauto("ABC-15", 180, 52.5)
+polttomoottoriauto = Polttomoottoriauto("ACD-123", 165, 32.3)
+
+sahkoauto.kiihdytä(100)
+polttomoottoriauto.kiihdytä(90)
+
+sahkoauto.kulje(3)
+polttomoottoriauto.kulje(3)
+
+print(f"Auton {sahkoauto.rekkari} mittarilukema on: {sahkoauto.km_kuljettu}")
+print(f"Auton {polttomoottoriauto.rekkari} mittarilukema on: {polttomoottoriauto.km_kuljettu}")
