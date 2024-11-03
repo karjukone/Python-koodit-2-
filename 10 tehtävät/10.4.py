@@ -17,28 +17,53 @@ class Auto:
     def kulje(self, tunnit):
         self.km_kuljettu += self.hetk_nopeus * tunnit
 
+class Kilpailu: 
+    def __init__(self, nimi, pituus, autot):
+        self.nimi = nimi
+        self.pituus = pituus
+        self.autot = autot
+
+    def tunti_kuluu(self):
+      for auto in self.autot:
+            nopeuden_muutos = random.randint(-10, 15)
+            auto.kiihdyta(nopeuden_muutos)
+            auto.kulje(1)
+
+    def tulosta_tilanne(self):
+        print(f"{'Rekisteri':<10}{'Huippunopeus':<15}{'Nopeus':<10}{'Kuljettu matka':<15}")
+        print("-" * 50)
+        for auto in self.autot:
+            print(f"{auto.rekisteritunnus:<10}{auto.huippunopeus:<15}{auto.nopeus:<10}{auto.kuljettu_matka:<15.2f}")
+        print()
+
+
+    def kilpailu_ohi(self):
+        for auto in self.autot:
+            if auto.kuljettu_matka >= self.pituus:
+                return True
+        return False
+
 autot = []
 for i in range(1, 11):
     rekkari = f"123-{i}"
     huippunopeus = random.randint(100, 200)
     autot.append(Auto(rekkari, huippunopeus))
 
-kaynnissa = True
-tunnit = 0 
 
-while kaynnissa:
-    tunnit += 1
 
-    for auto in autot:
-        nopeuden_muutos = random.randint(-10, 15)
-        auto.kiihdytä(nopeuden_muutos)
-        auto.kulje(1)
+kilpailu = Kilpailu("Suuri romuralli", 8000, autot)
+tunti = 0
 
-        if auto.km_kuljettu >= 10000:
-            kaynnissa = False
 
 print("\nKilpailun tulokset: \n")
 
-print(f"{'Rekisteritunnus':<18} {'Huippunopeus':<15}{'Nopeus':<10}{'Kuljettu matka'}")
-for auto in autot:
-    print(f"{auto.rekkari:<19}{auto.huippunopeus:<15}{auto.hetk_nopeus:<10}{auto.km_kuljettu}")
+
+while not kilpailu.kilpailu_ohi():
+    kilpailu.tunti_kuluu()
+    tunti += 1
+    if tunti % 10 == 0:
+        print(f"Tunti {tunti}")
+        kilpailu.tulosta_tilanne()
+
+print("Kilpailu päättyi!")
+kilpailu.tulosta_tilanne()
