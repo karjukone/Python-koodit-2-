@@ -26,20 +26,19 @@ class Kilpailu:
     def tunti_kuluu(self):
       for auto in self.autot:
             nopeuden_muutos = random.randint(-10, 15)
-            auto.kiihdyta(nopeuden_muutos)
+            auto.kiihdytä(nopeuden_muutos)
             auto.kulje(1)
 
     def tulosta_tilanne(self):
-        print(f"{'Rekisteri':<10}{'Huippunopeus':<15}{'Nopeus':<10}{'Kuljettu matka':<15}")
-        print("-" * 50)
+        print(f"{'Rekkari':<10}{'Huippunopeus':<15}{'Nopeus':<10}{'Kuljettu matka':<15}")
         for auto in self.autot:
-            print(f"{auto.rekisteritunnus:<10}{auto.huippunopeus:<15}{auto.nopeus:<10}{auto.kuljettu_matka:<15.2f}")
+            print(f"{auto.rekkari:<10}{auto.huippunopeus:<15}{auto.hetk_nopeus:<10}{auto.km_kuljettu}")
         print()
 
 
     def kilpailu_ohi(self):
         for auto in self.autot:
-            if auto.kuljettu_matka >= self.pituus:
+            if auto.km_kuljettu >= self.pituus:
                 return True
         return False
 
