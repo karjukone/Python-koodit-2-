@@ -1,8 +1,13 @@
-import requests
+from pip._vendor import requests
 import json
 
 url = "https://api.chucknorris.io/jokes/random"
 
-vastaus = requests.get(url).json
+try:
+    vastaus = requests.get(url)
 
-print(vastaus)
+    if vastaus.status_code==200:
+        vitsi = vastaus.json()
+        print(vitsi['value'])
+except requests.exceptions.RequestException as e:
+    print("Haku epäonnistui :(")
